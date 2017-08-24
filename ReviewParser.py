@@ -9,6 +9,9 @@ def reviewParser():
     req = requests.get('http://pitchfork.com/reviews/albums/22835-homogenic/')
     #Parses the information to make it more easily traversable
     clean = BeautifulSoup(req.text, "html.parser")
-    print clean
+    album = clean.h1
+    artist = clean.h2
+    print album
+    print artist
     
 reviewParser()

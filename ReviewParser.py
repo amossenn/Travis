@@ -16,8 +16,24 @@ def reviewParser():
     album = article.h1
     #Grabs the full class tag with the artist name
     artist = article.h2
+    #Grabs the full clas tag with the release year
+    year = article.span
+    #Grabs the full class tag with the genre
+    genre = article.find_all(class_="genre-list__link")
+    #Grabs the full class tag with the review score
+    score = article.find_all(class_="score")
+    #Grabs the full class tag with the review date
+    date = article.time
+    #Grabs the full class tag with the author name
+    author = article.find_all(class_="authors-detail__display-name")
+
 
     print album
     print artist
+    print year
+    print genre
+    print score
+    print date
+    print author
     
 reviewParser()

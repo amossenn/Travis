@@ -8,9 +8,15 @@ def reviewParser():
     #Grabs html information from the Pitchfork website
     req = requests.get('http://pitchfork.com/reviews/albums/22835-homogenic/')
     #Parses the information to make it more easily traversable
-    clean = BeautifulSoup(req.text, "html.parser")
-    album = clean.h1
-    artist = clean.h2
+    soup = BeautifulSoup(req.text, "html.parser")
+    #Gets the part of HTML with the information needed
+    article = soup.article
+
+    #Grabs the full class tag with the album name
+    album = article.h1
+    #Grabs the full class tag with the artist name
+    artist = article.h2
+
     print album
     print artist
     

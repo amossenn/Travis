@@ -45,6 +45,7 @@ def reviewParser():
     genre = genre.rsplit("\">")[1]
     genre = genre.split("</")[0]
     genre = genre.decode("utf-8")
+    genre = genre.replace("&amp;", "&")
     
     #Removes surrounding text from score
     score = score.split("\">")[1]

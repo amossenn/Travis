@@ -13,20 +13,53 @@ def reviewParser():
     article = soup.article
 
     #Grabs the full class tag with the album name
-    album = article.h1
+    album = str(article.h1)
     #Grabs the full class tag with the artist name
-    artist = article.h2
-    #Grabs the full clas tag with the release year
-    year = article.span
+    artist = str(article.h2.a)
+    #Grabs the full class tag with the release year
+    year = str(article.span)
     #Grabs the full class tag with the genre
-    genre = article.find_all(class_="genre-list__link")
+    genre = str(article.find_all(class_="genre-list__link"))
     #Grabs the full class tag with the review score
-    score = article.find_all(class_="score")
+    score = str(article.find_all(class_="score"))
     #Grabs the full class tag with the review date
-    date = article.time
+    date = str(article.time)
     #Grabs the full class tag with the author name
-    author = article.find_all(class_="authors-detail__display-name")
+    author = str(article.find_all(class_="authors-detail__display-name"))
+    
+    #Removes surrounding text from artist name
+    artist = artist.split("\">")[1]
+    artist = artist.rsplit("</")[0]
+    artist = artist.decode("utf-8")
+    
+    #Removes surrounding text from album name
+    album = album.split("\">")[1]
+    album = album.rsplit("</")[0]
+    album = album.decode("utf-8")
+    
+    #Removes surrounding text from release year
+    year = year.rsplit("<!-- /react-text --></span>")[0]
+    year = year[(len(year)-4):(len(year))]
+    
+    #Removes surrounding text from first genre listed in review
+    genre = genre.rsplit("\">")[1]
+    genre = genre.split("</")[0]
+    genre = genre.decode("utf-8")
+    
+    #Removes surrounding text from score
+    score = score.split("\">")[1]
+    score = score.rsplit("</")[0]
+    
+    #Removes surrounding text from author's name
+    author = author.split("\">")[1]
+    author = author.rsplit("</")[0]
+    author = author.decode("utf-8")
 
+    #Removes surrounding text from review date
+    date = date.split("\">")[1]
+    date = date.rsplit("</")[0]
+    dateList = date.split(" ")
+    date = dateList[0] + " " + dateList[2]
 
     print album
     print artist
